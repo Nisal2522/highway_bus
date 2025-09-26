@@ -1,0 +1,646 @@
+/* App Promotion Section */
+.ap {
+  width: 100%;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.ap::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(30, 58, 138, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(147, 197, 253, 0.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.ap__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header Section */
+.ap__header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.ap__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+}
+
+.ap__heading {
+  color: #1e293b;
+  font-weight: 800;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  position: relative;
+}
+
+.ap__heading::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #3b82f6, #1e40af);
+  border-radius: 2px;
+  animation: headingLine 3s ease-in-out infinite;
+}
+
+@keyframes headingLine {
+  0%, 100% { width: 80px; opacity: 0.7; }
+  50% { width: 120px; opacity: 1; }
+}
+
+.ap__lead {
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Content Layout */
+.ap__content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 4rem;
+}
+
+/* Left Section - Features */
+.ap__left {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.ap__features {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.ap__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.ap__feature--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ap__feature::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.05), transparent);
+  transition: left 0.6s;
+}
+
+.ap__feature:hover::before {
+  left: 100%;
+}
+
+.ap__feature:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-color: #3b82f6;
+}
+
+.ap__feature-icon {
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  transition: all 0.3s ease;
+}
+
+.ap__feature:hover .ap__feature-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+}
+
+.ap__feature-content {
+  flex: 1;
+}
+
+.ap__feature-title {
+  color: #1e293b;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.ap__feature-desc {
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* CTA Section */
+.ap__cta {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.ap__download-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.ap__download-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+  min-width: 180px;
+}
+
+.ap__download-btn--primary {
+  background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(30, 58, 138, 0.4);
+}
+
+.ap__download-btn--secondary {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(30, 41, 59, 0.4);
+}
+
+.ap__download-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s;
+}
+
+.ap__download-btn:hover::before {
+  left: 100%;
+}
+
+.ap__download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(30, 58, 138, 0.6);
+}
+
+.ap__download-btn--secondary:hover {
+  box-shadow: 0 8px 25px rgba(30, 41, 59, 0.6);
+}
+
+.ap__download-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ap__download-label {
+  font-size: 0.7rem;
+  opacity: 0.8;
+  font-weight: 500;
+}
+
+.ap__download-platform {
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+/* Stats Section */
+.ap__stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.ap__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.ap__stat-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #1e40af;
+}
+
+.ap__stat-label {
+  font-size: 0.8rem;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Right Section - Phone */
+.ap__right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ap__phone-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ap__phone-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: phoneGlow 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes phoneGlow {
+  0%, 100% { 
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% { 
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.ap__phone-image {
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 24px;
+  position: relative;
+  z-index: 3;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.ap__phone-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* Phone Container */
+.ap__phone-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ap__phone-frame {
+  width: 200px;
+  height: 350px;
+  background: #1e293b;
+  border-radius: 20px;
+  padding: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.ap__phone-header {
+  height: 20px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  margin-bottom: 8px;
+}
+
+.ap__phone-status {
+  display: flex;
+  gap: 2px;
+  color: #ffffff;
+}
+
+.ap__phone-screen {
+  background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+  border-radius: 12px;
+  padding: 12px;
+  height: calc(100% - 28px);
+  display: flex;
+  flex-direction: column;
+}
+
+.ap__app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.ap__app-logo {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.ap__app-menu {
+  display: flex;
+  gap: 2px;
+}
+
+.ap__menu-dot {
+  width: 3px;
+  height: 3px;
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.ap__app-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ap__search-bar {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffffff;
+  font-size: 0.7rem;
+}
+
+.ap__quick-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.ap__action-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  color: #ffffff;
+  font-size: 0.6rem;
+  text-align: center;
+}
+
+/* Benefits Section */
+.ap__benefits {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  padding-top: 2rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.ap__benefit {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #64748b;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.ap__benefit svg {
+  color: #10b981;
+}
+
+/* Animation Classes */
+.ap--visible {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .ap__content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .ap__left {
+    order: 2;
+  }
+  
+  .ap__right {
+    order: 1;
+  }
+  
+  .ap__features {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  
+  .ap__download-buttons {
+    justify-content: center;
+  }
+  
+  .ap__stats {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .ap {
+    padding: 4rem 0;
+  }
+  
+  .ap__container {
+    padding: 0 0.5rem;
+  }
+  
+  .ap__heading {
+    font-size: 2rem;
+  }
+  
+  .ap__lead {
+    font-size: 1rem;
+  }
+  
+  .ap__features {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .ap__feature {
+    padding: 1rem;
+  }
+  
+  .ap__feature-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .ap__feature-title {
+    font-size: 1rem;
+  }
+  
+  .ap__feature-desc {
+    font-size: 0.9rem;
+  }
+  
+  .ap__download-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .ap__download-btn {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+  
+  .ap__stats {
+    gap: 1.5rem;
+  }
+  
+  .ap__stat-number {
+    font-size: 1.25rem;
+  }
+  
+  .ap__benefits {
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .ap__phone-image {
+    max-width: 220px;
+  }
+  
+  .ap__phone-frame {
+    width: 160px;
+    height: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .ap__heading {
+    font-size: 1.75rem;
+  }
+  
+  .ap__lead {
+    font-size: 0.9rem;
+  }
+  
+  .ap__feature {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.75rem;
+  }
+  
+  .ap__feature-icon {
+    align-self: center;
+  }
+  
+  .ap__download-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.8rem;
+  }
+  
+  .ap__download-platform {
+    font-size: 0.9rem;
+  }
+  
+  .ap__stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .ap__phone-image {
+    max-width: 180px;
+  }
+  
+  .ap__phone-frame {
+    width: 140px;
+    height: 240px;
+  }
+}

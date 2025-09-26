@@ -1,0 +1,306 @@
+/* SearchForm - Matching Image Design Exactly */
+.search-form {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  position: relative;
+  z-index: 10;
+}
+
+.search-form__container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background: rgba(128, 128, 128, 0.3);
+  backdrop-filter: blur(15px) saturate(120%);
+  -webkit-backdrop-filter: blur(15px) saturate(120%);
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    0 4px 16px rgba(0, 0, 0, 0.05),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.search-form__container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 50%),
+    linear-gradient(135deg, transparent 30%, rgba(255, 255, 255, 0.01) 50%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.search-form__container:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    0 6px 20px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.15);
+  background: rgba(128, 128, 128, 0.4);
+  backdrop-filter: blur(20px) saturate(120%);
+  -webkit-backdrop-filter: blur(20px) saturate(120%);
+}
+
+.search-form__field {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  z-index: 1;
+}
+
+.search-form__select,
+.search-form__date {
+  width: 100%;
+  padding: 1rem 2.5rem 1rem 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  background: #374151;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  appearance: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.search-form__select:focus,
+.search-form__date:focus {
+  outline: none;
+  background: #4b5563;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 
+    0 0 0 3px rgba(102, 126, 234, 0.2),
+    0 8px 20px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.search-form__select:hover,
+.search-form__date:hover {
+  background: #4b5563;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+  box-shadow: 
+    0 6px 16px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.search-form__select option {
+  background: #374151;
+  color: #ffffff;
+  padding: 0.5rem;
+}
+
+.search-form__icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ffffff;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.search-form__select:focus + .search-form__icon,
+.search-form__date:focus + .search-form__icon {
+  color: #667eea;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.search-form__button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+  color: #ffffff;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 8px 20px rgba(30, 58, 138, 0.3),
+    0 4px 12px rgba(30, 58, 138, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.search-form__button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.search-form__button:hover {
+  background: linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%);
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 30px rgba(30, 58, 138, 0.4),
+    0 6px 18px rgba(30, 58, 138, 0.3);
+}
+
+.search-form__button:hover::before {
+  left: 100%;
+}
+
+.search-form__button:active {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 6px 15px rgba(30, 58, 138, 0.3),
+    0 3px 9px rgba(30, 58, 138, 0.2);
+}
+
+.search-form__button span {
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+/* Enhanced responsive design */
+@media (max-width: 1200px) {
+  .search-form {
+    max-width: 1000px;
+    padding: 1.5rem 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .search-form {
+    padding: 1rem;
+  }
+  
+  .search-form__container {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .search-form__select,
+  .search-form__date {
+    padding: 0.875rem 2.25rem 0.875rem 0.875rem;
+    font-size: 0.95rem;
+  }
+  
+  .search-form__button {
+    padding: 0.875rem 1.25rem;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-form__container {
+    padding: 1rem;
+  }
+  
+  .search-form__select,
+  .search-form__date {
+    padding: 0.75rem 2rem 0.75rem 0.75rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }
+  
+  .search-form__button {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 10px;
+  }
+  
+  .search-form__icon {
+    right: 0.75rem;
+    size: 14px;
+  }
+}
+
+/* Professional typography */
+.search-form {
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth transitions for all elements */
+.search-form * {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus states for accessibility */
+.search-form__select:focus,
+.search-form__date:focus,
+.search-form__button:focus {
+  outline: 2px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Loading state for button */
+.search-form__button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.search-form__button:disabled:hover {
+  transform: none;
+  box-shadow: 
+    0 8px 20px rgba(30, 58, 138, 0.3),
+    0 4px 12px rgba(30, 58, 138, 0.2);
+}
+
+/* Animation for form appearance */
+.search-form {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Glass morphic animation */
+.search-form__container::before {
+  animation: glassShimmer 12s ease-in-out infinite;
+}
+
+@keyframes glassShimmer {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateX(-5px) translateY(-5px);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateX(5px) translateY(5px);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

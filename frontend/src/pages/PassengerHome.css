@@ -1,0 +1,141 @@
+/* Passenger Home Styles */
+.passenger-home {
+  min-height: 100vh;
+  width: 100%;
+  background: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.passenger-home main {
+  width: 100%;
+  position: relative;
+  min-height: calc(100vh - 200px); /* Account for navbar and footer */
+}
+
+/* Ensure sections flow properly */
+.passenger-home section {
+  width: 100%;
+  position: relative;
+  display: block;
+}
+
+/* Navbar positioning - Remove the relative positioning override */
+.passenger-home .navbar {
+  position: fixed !important; /* Force fixed positioning */
+  z-index: 1000;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* TopBar positioning */
+.passenger-home .topbar {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+/* HeroSection positioning */
+.passenger-home .hero {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* SearchForm positioning */
+.passenger-home .search {
+  position: relative;
+  z-index: 8;
+  width: 100%;
+}
+
+/* SeasonalPicks positioning */
+.passenger-home .sp {
+  position: relative;
+  z-index: 6;
+  width: 100%;
+}
+
+/* ExclusiveJourneys positioning */
+.passenger-home .ej {
+  position: relative;
+  z-index: 7;
+  width: 100%;
+}
+
+/* AppPromotion positioning */
+.passenger-home .ap {
+  position: relative;
+  z-index: 6;
+  width: 100%;
+}
+
+/* Footer positioning */
+.passenger-home footer {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .passenger-home {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  .passenger-home main {
+    width: 100%;
+    min-height: calc(100vh - 150px);
+  }
+  
+  .passenger-home section {
+    width: 100%;
+  }
+}
+
+/* Ensure proper spacing between sections */
+.passenger-home section + section {
+  margin-top: 0;
+}
+
+/* Container styles */
+.passenger-home .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .passenger-home .container {
+    padding: 0 2rem;
+  }
+}
+
+/* Force full width for all components */
+.passenger-home * {
+  max-width: 100%;
+}
+
+/* Ensure navbar is visible */
+.passenger-home header {
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  display: block;
+}
+
+/* Ensure footer is visible */
+.passenger-home footer {
+  position: relative;
+  z-index: 1000;
+  width: 100%;
+  display: block;
+}
