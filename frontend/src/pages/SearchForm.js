@@ -1,16 +1,38 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search as SearchIcon, ChevronDown as ChevronDownIcon, Calendar as CalendarIcon } from "lucide-react";
 import "./SearchForm.css";
 
 export const SearchForm = ({ onSearchResults }) => {
   const [fromLocation, setFromLocation] = useState("");
   const [toLocation, setToLocation] = useState("");
-  const [selectedDate, setSelectedDate] = useState("2025-08-29");
+  const [selectedDate, setSelectedDate] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  // Set current date when component mounts
+  useEffect(() => {
+    const today = new Date();
+    setSelectedDate(today.toISOString().split('T')[0]);
+  }, []);
+
+  // Function to get current date in YYYY-MM-DD format
+  const getCurrentDate = () => {
+    const today = new Date();
+    return today.toISOString().split('T')[0];
+  };
 
   const handleSearch = async () => {
     if (!fromLocation && !toLocation) {
       alert("Please select at least one location (From or To)");
+      return;
+    }
+
+    // Validate date - prevent selecting past dates
+    const selectedDateObj = new Date(selectedDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time to start of day for accurate comparison
+    
+    if (selectedDateObj < today) {
+      alert("Please select today's date or a future date");
       return;
     }
 
@@ -86,6 +108,7 @@ export const SearchForm = ({ onSearchResults }) => {
             className="search-form__date" 
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
+            min={getCurrentDate()}
           />
           <CalendarIcon className="search-form__icon" size={16} />
         </div>
