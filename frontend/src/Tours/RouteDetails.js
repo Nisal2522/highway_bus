@@ -8,6 +8,7 @@ const RouteDetails = ({ route, onBack }) => {
   const [selectedPackage, setSelectedPackage] = useState('standard');
   const [isBookingPageOpen, setIsBookingPageOpen] = useState(false);
   const [selectedPackageForBooking, setSelectedPackageForBooking] = useState(null);
+  const [packages, setPackages] = useState({});
 
   // Function to get the specific background image for each destination
   const getRouteBackgroundImage = (city) => {
@@ -32,6 +33,60 @@ const RouteDetails = ({ route, onBack }) => {
         return route.imageUrl || require('../assets/Tourista.png');
     }
   };
+
+  // Load packages from localStorage
+  useEffect(() => {
+    const loadPackages = () => {
+      const adminPackages = localStorage.getItem('adminPackages');
+      if (adminPackages && adminPackages !== 'null' && adminPackages !== 'undefined') {
+        try {
+          const parsedPackages = JSON.parse(adminPackages);
+          // Filter out inactive packages and convert to the format expected by RouteDetails
+          const activePackages = parsedPackages
+            .filter(pkg => pkg.isActive === true)
+            .reduce((acc, pkg) => {
+              acc[pkg.name] = {
+                price: pkg.basePrice,
+                features: pkg.options ? pkg.options.map(opt => `${opt.optionType}: ${opt.name}`) : []
+              };
+              return acc;
+            }, {});
+          setPackages(activePackages);
+        } catch (error) {
+          console.error('Error parsing admin packages:', error);
+          // Fallback to hardcoded packages
+          setPackages({
+            basic: { price: 10000, features: ["Standard transport", "Basic accommodation", "Breakfast included"] },
+            standard: { price: 30000, features: ["Luxury transport", "4-star accommodation", "All meals included", "Professional guide"] },
+            premium: { price: 50000, features: ["Private transport", "5-star accommodation", "All meals + drinks", "Personal guide", "VIP experiences"] }
+          });
+        }
+      } else {
+        // Fallback to hardcoded packages
+        setPackages({
+          basic: { price: 10000, features: ["Standard transport", "Basic accommodation", "Breakfast included"] },
+          standard: { price: 30000, features: ["Luxury transport", "4-star accommodation", "All meals included", "Professional guide"] },
+          premium: { price: 50000, features: ["Private transport", "5-star accommodation", "All meals + drinks", "Personal guide", "VIP experiences"] }
+        });
+      }
+    };
+
+    // Load packages on mount
+    loadPackages();
+
+    // Listen for package updates
+    const handlePackageUpdate = () => {
+      loadPackages();
+    };
+
+    window.addEventListener('packageUpdated', handlePackageUpdate);
+    window.addEventListener('storage', handlePackageUpdate);
+
+    return () => {
+      window.removeEventListener('packageUpdated', handlePackageUpdate);
+      window.removeEventListener('storage', handlePackageUpdate);
+    };
+  }, []);
 
   // Scroll to top when component mounts
   useEffect(() => {
@@ -94,11 +149,6 @@ const RouteDetails = ({ route, onBack }) => {
     }
   ];
 
-  const packages = {
-    basic: { price: 10000, features: ["Standard transport", "Basic accommodation", "Breakfast included"] },
-    standard: { price: 30000, features: ["Luxury transport", "4-star accommodation", "All meals included", "Professional guide"] },
-    premium: { price: 50000, features: ["Private transport", "5-star accommodation", "All meals + drinks", "Personal guide", "VIP experiences"] }
-  };
 
   return (
     <div className="route-details-page">
