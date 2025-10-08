@@ -11,10 +11,12 @@ import {
   BarChart3,
   Route,
   Search,
-  CreditCard
+  CreditCard,
+  MapPin
 } from 'lucide-react';
 import AdminRoutes from './AdminRoutes';
 import AdminApprove from './adminapprove';
+import AdminTourManagement from '../Tours/AdminTourManagement';
 import Navbar from '../components/Navbar';
 import { Footer } from '../components/Footer';
 import PaymentGateway from '../components/PaymentGateway';
@@ -36,6 +38,7 @@ const AdminDashboard = ({ onLogout }) => {
   const [showRoutes, setShowRoutes] = useState(false);
   const [showApproveBus, setShowApproveBus] = useState(false);
   const [showViewPayment, setShowViewPayment] = useState(false);
+  const [showTourManagement, setShowTourManagement] = useState(false);
   const [routes, setRoutes] = useState([]);
   const [approvedBuses, setApprovedBuses] = useState([]);
   const [pendingBuses, setPendingBuses] = useState([]);
@@ -152,6 +155,24 @@ const AdminDashboard = ({ onLogout }) => {
         }
       }, 100);
     }
+  };
+  const handleTourManagementClick = () => {
+    if (showTourManagement) {
+      setShowTourManagement(false);
+    } else {
+      setShowTourManagement(true);
+      // Scroll to the tour management section after a short delay
+      setTimeout(() => {
+        const tourManagementElement = document.querySelector('.tour-management-section');
+        if (tourManagementElement) {
+          tourManagementElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  };
+
+  const handleCloseTourManagement = () => {
+    setShowTourManagement(false);
   };
 
   const handleCloseRoutes = () => {
@@ -1572,6 +1593,10 @@ const AdminDashboard = ({ onLogout }) => {
                 <h3>{showViewPayment ? '✕' : <CreditCard size={40} />}</h3>
                 <p>{showViewPayment ? 'Close Payment' : 'View Payment'}</p>
               </div>
+              <div className={`stat-item tour-item ${showTourManagement ? 'active' : ''}`} onClick={handleTourManagementClick}>
+                <h3>{showTourManagement ? '✕' : <MapPin size={40} />}</h3>
+                <p>{showTourManagement ? 'Close Tours' : 'Tour Management'}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -2122,6 +2147,26 @@ const AdminDashboard = ({ onLogout }) => {
           </div>
         </div>
       )}
+
+      {/* Tour Management Section */}
+      {showTourManagement && (
+        <div className="tour-management-section">
+          <div className="routes-header">
+            <div className="header-icon">
+              <MapPin size={40} />
+            </div>
+            <h1>Tour Management</h1>
+            <p>Manage tour packages and routes</p>
+            <button className="close-button" onClick={handleCloseTourManagement}>
+              <X size={24} />
+            </button>
+          </div>
+          <div className="tour-management-content">
+            <AdminTourManagement />
+          </div>
+        </div>
+      )}
+
 
       {/* Routes Section */}
       {showRoutes && (
