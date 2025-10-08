@@ -318,6 +318,20 @@ body {
   background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(30, 58, 138, 0.05) 100%) !important;
 }
 
+.tour-item {
+  background: rgba(30, 58, 138, 0.15) !important;
+  border-color: rgba(30, 58, 138, 0.3) !important;
+}
+
+.tour-item:hover {
+  background: rgba(30, 58, 138, 0.25) !important;
+  border-color: rgba(30, 58, 138, 0.5) !important;
+}
+
+.tour-item::before {
+  background: linear-gradient(135deg, rgba(30, 58, 138, 0.1) 0%, rgba(30, 58, 138, 0.05) 100%) !important;
+}
+
 /* Main Dashboard Content */
 .dashboard-main {
   padding: 4rem 0;
@@ -1490,6 +1504,30 @@ body {
 }
 
 .route-item p {
+  color: #ffffff !important;
+}
+
+/* Tour Item Styles */
+.tour-item {
+  background: rgba(30, 58, 138, 0.15) !important;
+  border: 1px solid rgba(30, 58, 138, 0.3) !important;
+  backdrop-filter: blur(20px) !important;
+  -webkit-backdrop-filter: blur(20px) !important;
+}
+
+.tour-item.active {
+  background: rgba(30, 58, 138, 0.25) !important;
+  border-color: rgba(30, 58, 138, 0.5) !important;
+  transform: scale(1.05);
+  backdrop-filter: blur(25px) !important;
+  -webkit-backdrop-filter: blur(25px) !important;
+}
+
+.tour-item h3 {
+  color: #ffffff !important;
+}
+
+.tour-item p {
   color: #ffffff !important;
 }
 
