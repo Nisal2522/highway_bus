@@ -29,8 +29,29 @@ const BookingPage = ({ selectedPackage, packageData, onBack, onClose }) => {
     return diffDays;
   };
 
-  // Package options based on selected package
-  const packageOptions = {
+  // Package options based on selected package - use admin-managed data if available
+  const packageOptions = packageData ? {
+    [selectedPackage]: {
+      basePrice: Number(packageData.price) || 0,
+      packageTitle: `${packageData.name} Package`,
+      packageDescription: packageData.description || 'A great package for your journey.',
+      breakfast: [
+        { name: 'Continental light breakfast (toast, butter, jam, tea/coffee)', price: 0 },
+        { name: 'Vegetarian Sri Lankan breakfast (string hoppers, dhal curry, coconut sambol)', price: 200 },
+        { name: 'Simple rice & curry set', price: 300 }
+      ],
+      hotels: [
+        { name: 'Lake View Inn', price: 0 },
+        { name: 'City Comfort Lodge', price: 1500 },
+        { name: 'Green Palm Guesthouse', price: 2000 }
+      ],
+      transport: [
+        { name: 'Sunshine Express', price: 0 },
+        { name: 'GreenLine Coaches', price: 1000 },
+        { name: 'CityRide Travels', price: 1500 }
+      ]
+    }
+  } : {
     basic: {
       basePrice: 10000,
       packageTitle: 'Basic Package (Budget-Friendly)',
@@ -98,19 +119,19 @@ const BookingPage = ({ selectedPackage, packageData, onBack, onClose }) => {
     if (!selectedPackage) return;
 
     const options = packageOptions[selectedPackage];
-    let total = options.basePrice;
+    let total = Number(options.basePrice) || 0;
 
     // Add breakfast cost
     const selectedBreakfast = options.breakfast.find(b => b.name === formData.breakfast);
-    if (selectedBreakfast) total += selectedBreakfast.price;
+    if (selectedBreakfast) total += Number(selectedBreakfast.price) || 0;
 
     // Add hotel cost
     const selectedHotel = options.hotels.find(h => h.name === formData.hotel);
-    if (selectedHotel) total += selectedHotel.price;
+    if (selectedHotel) total += Number(selectedHotel.price) || 0;
 
     // Add transport cost
     const selectedTransport = options.transport.find(t => t.name === formData.transport);
-    if (selectedTransport) total += selectedTransport.price;
+    if (selectedTransport) total += Number(selectedTransport.price) || 0;
 
     // Multiply by number of days calculated from date range
     const numberOfDays = calculateNumberOfDays();
