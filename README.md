@@ -1,7 +1,7 @@
 <h1 align="center">🚌 Express Bus & Tour Management System</h1>
 
 <p align="center">
-  <img src="./assets/bus-banner-dark.png" alt="Express Bus Management Banner" width="800"/>
+  <img src="./frontend/src/assets/banner.jpeg" alt="Express Bus Management Banner" width="800"/>
 </p>
 
 <p align="center">
