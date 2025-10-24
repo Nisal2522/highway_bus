@@ -510,7 +510,7 @@ const SeatBooking = () => {
   return (
     <div className="seat-booking">
       <div className="seat-booking-header">
-        <button className="back-button" onClick={() => navigate(-1)}>
+        <button className="back-button" onClick={() => navigate('/dashboard')}>
           <ArrowLeft size={20} />
           Back
         </button>
