@@ -26,8 +26,8 @@ import './BusDetails.css';
 
 const AdminDashboard = ({ onLogout }) => {
   const [stats, setStats] = useState({
-    totalBuses: 156,
-    pendingApprovals: 23,
+    totalBuses: 0,
+    pendingApprovals: 0,
     activeRoutes: 0,
     totalUsers: 0,
     passengerCount: 0,
@@ -49,7 +49,110 @@ const AdminDashboard = ({ onLogout }) => {
   const [selectedRoute, setSelectedRoute] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('ALL');
-  
+
+  // Function to fetch dashboard statistics from backend using existing endpoints
+  const fetchDashboardStats = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.log('No authentication token found');
+        return;
+      }
+
+      const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      };
+
+      // Fetch data from multiple endpoints
+      const [busesResponse, routesResponse, usersResponse, pendingBusesResponse] = await Promise.all([
+        fetch('http://localhost:8081/api/buses', { headers }),
+        fetch('http://localhost:8081/api/routes/statistics', { headers }),
+        fetch('http://localhost:8081/api/users', { headers }),
+        fetch('http://localhost:8081/api/buses/pending', { headers })
+      ]);
+
+      let totalBuses = 0;
+      let pendingApprovals = 0;
+      let activeRoutes = 0;
+      let totalUsers = 0;
+      let passengerCount = 0;
+      let ownerCount = 0;
+
+      // Process buses data
+      if (busesResponse.ok) {
+        const busesData = await busesResponse.json();
+        if (busesData.success && busesData.data) {
+          totalBuses = busesData.data.length || 0;
+        }
+      }
+
+      // Process pending buses data
+      if (pendingBusesResponse.ok) {
+        const pendingData = await pendingBusesResponse.json();
+        if (pendingData.success && pendingData.data) {
+          pendingApprovals = pendingData.data.length || 0;
+        }
+      }
+
+      // Process routes data
+      if (routesResponse.ok) {
+        const routesData = await routesResponse.json();
+        if (routesData.success && routesData.data) {
+          activeRoutes = routesData.data.activeRoutes || 0;
+        }
+      }
+
+      // Process users data
+      if (usersResponse.ok) {
+        const usersData = await usersResponse.json();
+        if (usersData.success && usersData.data) {
+          const users = usersData.data;
+          totalUsers = users.length || 0;
+          
+          // Count passengers and owners
+          passengerCount = users.filter(user => user.userType === 'PASSENGER').length;
+          ownerCount = users.filter(user => user.userType === 'OWNER').length;
+        }
+      }
+
+      console.log('Dashboard stats fetched:', {
+        totalBuses,
+        pendingApprovals,
+        activeRoutes,
+        totalUsers,
+        passengerCount,
+        ownerCount
+      });
+
+      setStats({
+        totalBuses,
+        pendingApprovals,
+        activeRoutes,
+        totalUsers,
+        passengerCount,
+        ownerCount
+      });
+
+    } catch (error) {
+      console.error('Error fetching dashboard stats:', error);
+      // Fallback to default values if network error
+      setStats({
+        totalBuses: 0,
+        pendingApprovals: 0,
+        activeRoutes: 0,
+        totalUsers: 0,
+        passengerCount: 0,
+        ownerCount: 0
+      });
+    }
+  };
+
+  // Fetch dashboard stats when component mounts
+  useEffect(() => {
+    fetchDashboardStats();
+  }, []);
+
   // Form state
   const [formData, setFormData] = useState({
     from: '',
