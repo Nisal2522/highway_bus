@@ -8,11 +8,7 @@ export const SearchForm = ({ onSearchResults }) => {
   const [selectedDate, setSelectedDate] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  // Set current date when component mounts
-  useEffect(() => {
-    const today = new Date();
-    setSelectedDate(today.toISOString().split('T')[0]);
-  }, []);
+  // No default date - let users select their own date
 
   // Function to get current date in YYYY-MM-DD format
   const getCurrentDate = () => {
