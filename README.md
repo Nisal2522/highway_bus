@@ -75,3 +75,28 @@ Here’s how to set up and run both **Frontend** and **Backend** locally 👇
 #### 1️⃣ Navigate to the Frontend Folder
 ```bash
 cd frontend
+
+
+🔐 Test Login Credentials
+
+Use the following demo accounts to test system functionality based on different user roles.
+
+🧑‍💼 Bus Owner
+
+Email: indumini@gmail.com
+
+Password: Indumini@2522
+
+🧑‍💻 Administrator
+
+Email: admin@highwayexpress.com
+
+Password: admin123
+
+👤 Passenger
+
+Email: nisalamarasekara@gmail.com
+
+Password: Nisal@2522
+
+⚠️ These credentials are provided for academic and demonstration purposes only.
